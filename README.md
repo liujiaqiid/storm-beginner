@@ -45,18 +45,18 @@ When nimbus or supervisor dies:
 ###AT-LEAST-ONCE PROCESSING
 STORM guarantees at-least-once processing of tuples.  
 
-**Message id*  gets assigned to a tuple when emitting from spout or bolt. Is 64 bits long.  
-**Tree of tuples*  is the tuples generated (directly and indirectly) from a spout tuple.  
-**Ack*  is called on spout, when tree of tuples for spout tuple is fully processed.   
-**Fail*  is called on spout, if one of the tuples in the tree of tuples fails or the tree of tuples is not fully processed within a specified timeout (default is 30 seconds).
+* *Message id*  gets assigned to a tuple when emitting from spout or bolt. Is 64 bits long.  
+* *Tree of tuples*  is the tuples generated (directly and indirectly) from a spout tuple.  
+* *Ack*  is called on spout, when tree of tuples for spout tuple is fully processed.   
+* *Fail*  is called on spout, if one of the tuples in the tree of tuples fails or the tree of tuples is not fully processed within a specified timeout (default is 30 seconds).
 It is possible to specify the message id, when emitting a tuple. This might be useful for replaying tuples from a queue.  
 
 IMAGE-3  
 
-**Anchoring* is used to copy the spout tuple message id(s) to the new tuples generated. In this way, every tuple knows the message id(s) of all spout tuples.
-**Multi-anchoring* is when multiple tuples are anchored. If the tuple tree fails, then multiple spout tuples will be replayed. Useful for doing streaming joins and more.
-**Ack* called from a bolt, indicates the tuple has been processed as intented
-**Fail* called from a bolt, replays the spout tuple(s)
+* *Anchoring* is used to copy the spout tuple message id(s) to the new tuples generated. In this way, every tuple knows the message id(s) of all spout tuples.
+* *Multi-anchoring* is when multiple tuples are anchored. If the tuple tree fails, then multiple spout tuples will be replayed. Useful for doing streaming joins and more.
+* *Ack* called from a bolt, indicates the tuple has been processed as intented
+* *Fail* called from a bolt, replays the spout tuple(s)
 
 Every tuple must be acked/failed or the task will run out of memory at some point.  
 
